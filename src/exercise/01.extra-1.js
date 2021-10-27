@@ -2,10 +2,14 @@
 // http://localhost:3000/isolated/exercise/01.js
 
 import * as React from 'react'
-const Globe = React.lazy(() => import('../globe'))
+let Globe = React.lazy(() => import('../globe'))
 
 function App() {
   const [showGlobe, setShowGlobe] = React.useState(false)
+
+  function loadGlobe() {
+    import('../globe')
+  }
 
   // 🐨 wrap the code below in a <React.Suspense /> component
   // with a fallback.
@@ -28,6 +32,8 @@ function App() {
             type="checkbox"
             checked={showGlobe}
             onChange={e => setShowGlobe(e.target.checked)}
+            onMouseOver={() => loadGlobe()}
+            onFocus={() => loadGlobe()}
           />
           {' show globe'}
         </label>
